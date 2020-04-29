@@ -65,46 +65,30 @@
 			fatherDiv.insertBefore(bottom, null);
  		}
  		var arrDiv = document.getElementsByTagName('div');
- 		function isArray (arr) {
- 			// var arr = document.getElementsByTagName('div');
- 			// if(Array.isArray(value)) {
- 				return Object.prototype.toString.call(arr) == '[object Array]'; 			}
- 		// }
- 		function isFunction (fn) {
+
+
+
+ 		function isArray(arr) {
+ 				return Object.prototype.toString.call(arr) == '[object Array]';
+ 		}
+
+ 		function isFunction(fn) {
  			return Object.prototype.toString.call(fn) == '[object function]';
  		}
- 		// console.log(isFunction(isArray));
+
+
  		function cloneObject(src) {
-		    for(var i=0;i<src.length;i++){
+		    for (var i = 0; i < src.length; i++) {
 		    	var arr2 = [];
-				if(typeof src[i] == 'object'){
-					arr2[i]=[];
-				}else{
-					arr2[i]=src[i];
+
+				if (typeof src[i] == 'object') {
+					arr2[i] = [];
+				} else {
+					arr2[i] = src[i];
 				}
 			}
 			return arr2;
 		}
-
-// 测试用例：
-		var srcObj = {
-		    a: 1,
-		    b: {
-		        b1: ["hello", "hi"],
-		        b2: "JavaScript"
-		    }
-		};
-		var abObj = srcObj;
-		var tarObj = cloneObject(srcObj);
-
-		srcObj.a = 2;
-		srcObj.b.b1[0] = "Hello";
-
-		console.log(abObj.a);
-		console.log(abObj.b.b1[0]);
-
-		console.log(tarObj.a);      // 1
-		console.log(tarObj.b.b1[0]);    // "hello"
  	</script>
 </body>
 </html>
