@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="./src/css/common.css">
+	<link rel="stylesheet" href="./src/css/normallize.css">
+	<link rel="stylesheet" href="./src/css/index.css">
+	<!-- <script type="text/javascript" src="./src/js/segementfault.js"></script>
+ -->
+</head>
+<body>
+	<div class="content-middle-text" id="text-div">
+		<div class="fl text-left" id="text">
+			<h2 id="last-h2"></h2>
+			<p id="last-p"></p>
+		</div>
+		<div class="fr text-right">
+			<img src="./src/img/text-img.jpg">
+		</div>
+		<div class="text-bottom fl" id = "text-bottom">
+			<a class="text-bottom-a" href="*">x25</a>
+			<span class="dot">·</span>
+			<a class="text-bottom-as" href="*">赞</a>
+			<a class="text-bottom-at" href="*">Python数据科学</a>
+			<span class="dot">·</span>
+			<p>4月11日</p>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var newsList = [{
+			title: '厉害了！每30秒学会一个Python小技巧，Github星数4600+',
+			content: '很多学习Python的朋友在项目实战中会遇到不少功能实现上的问题，有些问题并不是很难的问题，或者已经有了很好的方法来解决。当然，孰能生巧，当我们代码熟练了，自然就能总结一些好用的技巧'
+		}, {
+			title: '厉害了！每30秒学会一个Python小技巧，Github星数4600+',
+			content: '很多学习Python的朋友在项目实战中会遇到不少功能实现上的问题，有些问题并不是很难的问题，或者已经有了很好的方法来解决。当然，孰能生巧，当我们代码熟练了，自然就能总结一些好用的技巧'
+		}, {
+			title: '厉害了！每30秒学会一个Python小技巧，Github星数4600+',
+			content: '很多学习Python的朋友在项目实战中会遇到不少功能实现上的问题，有些问题并不是很难的问题，或者已经有了很好的方法来解决。当然，孰能生巧，当我们代码,熟练了，自然就能总结一些好用的技巧'
+		}, {
+			title: '厉害了！每30秒学会一个Python小技巧，Github星数4600+',
+			content: '很多学习Python的朋友在项目实战中会遇到不少功能实现上的问题，有些问题并不是很难的问题，或者已经有了很好的方法来解决。当然，孰能生巧，当我们代码熟练了，自然就能总结一些好用的技巧'
+		}];
+		var fatherDiv = document.getElementById("text-div");
+ 		var lastDiv = document.getElementById("text");
+ 		var i;
+ 		for (i = 0;i <= newsList.length-1;i++) {
+	 		var div = document.createElement("div");
+	 		fatherDiv.insertBefore(div, lastDiv);
+			div.className = lastDiv.className;
+			var lastH2 = document.getElementById("last-h2");
+			var h2 = document.createElement("h2");
+			h2.className = lastH2.className;
+			h2.id = lastH2.id;
+			lastH2.id = null;
+			var lastP = document.getElementById("last-p");
+			var p = document.createElement("P");
+			p.className = lastP.className;
+			p.id = lastP.id;
+			lastP.id = null;
+			div.insertBefore(h2, null);
+			div.insertBefore(p, null);
+			h2.innerHTML = newsList[i].title;
+			p.innerHTML = newsList[i].content;
+			var bottom = document.getElementById("text-bottom");
+			fatherDiv.insertBefore(bottom, null);
+ 		}
+ 		var arrDiv = document.getElementsByTagName('div');
+ 		function isArray (arr) {
+ 			// var arr = document.getElementsByTagName('div');
+ 			// if(Array.isArray(value)) {
+ 				return Object.prototype.toString.call(arr) == '[object Array]'; 			}
+ 		// }
+ 		function isFunction (fn) {
+ 			return Object.prototype.toString.call(fn) == '[object function]';
+ 		}
+ 		// console.log(isFunction(isArray));
+ 		function cloneObject(src) {
+		    for(var i=0;i<src.length;i++){
+		    	var arr2 = [];
+				if(typeof src[i] == 'object'){
+					arr2[i]=[];
+				}else{
+					arr2[i]=src[i];
+				}
+			}
+			return arr2;
+		}
+
+// 测试用例：
+		var srcObj = {
+		    a: 1,
+		    b: {
+		        b1: ["hello", "hi"],
+		        b2: "JavaScript"
+		    }
+		};
+		var abObj = srcObj;
+		var tarObj = cloneObject(srcObj);
+
+		srcObj.a = 2;
+		srcObj.b.b1[0] = "Hello";
+
+		console.log(abObj.a);
+		console.log(abObj.b.b1[0]);
+
+		console.log(tarObj.a);      // 1
+		console.log(tarObj.b.b1[0]);    // "hello"
+ 	</script>
+</body>
+</html>
