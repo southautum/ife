@@ -2,11 +2,10 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="./src/css/common.css">
-	<link rel="stylesheet" href="./src/css/normallize.css">
-	<link rel="stylesheet" href="./src/css/index.css">
-	<!-- <script type="text/javascript" src="./src/js/segementfault.js"></script>
- -->
+	<link rel="stylesheet" href="../segmentFault/src/css/common.css">
+	<link rel="stylesheet" href="../segmentFault/src/css/normallize.css">
+	<link rel="stylesheet" href="../segmentFault//src/css/index.css">
+	<script type="text/javascript" src="./utl.js"></script>
 </head>
 <body>
 	<div class="content-middle-text" id="text-div">
@@ -51,12 +50,12 @@
 			var h2 = document.createElement("h2");
 			h2.className = lastH2.className;
 			h2.id = lastH2.id;
-			lastH2.id = null;
+			lastH2.removeArritubte = ("id");
 			var lastP = document.getElementById("last-p");
 			var p = document.createElement("P");
 			p.className = lastP.className;
 			p.id = lastP.id;
-			lastP.id = null;
+			lastP.removeArritubte = ("id");
 			div.insertBefore(h2, null);
 			div.insertBefore(p, null);
 			h2.innerHTML = newsList[i].title;
@@ -74,37 +73,6 @@
  			return Object.prototype.toString.call(fn) == '[object function]';
  		}
  		// console.log(isFunction(isArray));
- 		function cloneObject(src) {
-		    for(var i=0;i<src.length;i++){
-		    	var arr2 = [];
-				if(typeof src[i] == 'object'){
-					arr2[i]=[];
-				}else{
-					arr2[i]=src[i];
-				}
-			}
-			return arr2;
-		}
-
-// 测试用例：
-		var srcObj = {
-		    a: 1,
-		    b: {
-		        b1: ["hello", "hi"],
-		        b2: "JavaScript"
-		    }
-		};
-		var abObj = srcObj;
-		var tarObj = cloneObject(srcObj);
-
-		srcObj.a = 2;
-		srcObj.b.b1[0] = "Hello";
-
-		console.log(abObj.a);
-		console.log(abObj.b.b1[0]);
-
-		console.log(tarObj.a);      // 1
-		console.log(tarObj.b.b1[0]);    // "hello"
  	</script>
 </body>
 </html>
