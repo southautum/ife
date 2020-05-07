@@ -1,7 +1,7 @@
 // 使用递归来实现一个深度克隆，可以复制一个目标对象，返回一个完整拷贝
 // 被复制的对象类型会被限制为数字、字符串、布尔、日期、数组、Object对象。不会包含函数、正则对象等
 
-function cloneObject(src) {
+var cloneObject = function(src){
 	var Result;
 	switch(Object.prototype.toString.call(src)){
         case "[object Number]": 
@@ -88,7 +88,7 @@ console.log(b); // [1, 3, 5, 7]
 }
 
 // 实例
-var str = "   hi!  ";
+var str = '   hi!  ';
 str = trim(str);
 console.log(str); // 'hi!'
 
@@ -99,6 +99,12 @@ function each(arr, fn) {
         fn(arr[i], i);
     }
 }
+// 实例
+var arr = ['java', 'c', 'php', 'html'];
+function output(item) {
+    console.log(item)
+}
+each(arr, output);  // java, c, php, html
 
 // 使用示例
 var arr = ['java', 'c', 'php', 'html'];
@@ -134,6 +140,7 @@ console.log(getObjectLength(obj)); // 3
 function domQuery(selector, root) {
     var text;
     var elements = [];
+    //if root is not defined, root = document
     if (!root) {
         root = document;
     }
@@ -144,12 +151,15 @@ function domQuery(selector, root) {
         text = selector.replace(/^\./, "");
         elements = root.getElementsByClassName(text);
     } else if ((selector.charAt(0) === "[") && (selector.charAt(selector.length - 1) === "]")) {
+        //get all the elements
         var eles = root.getElementsByTagName("*");
+        //delete "[" and "]"
         selector = selector.replace(/^\[/, "");
         selector = selector.replace(/\]$/, "");
         var texts = selector.split("=");
         var attr = texts[0];
         var value = texts[1];
+        //有属性值的情况
         if (texts[1]) {
             for (var i = 0, length1 = eles.length; i < length1; i++) {
                 if (eles[i].hasAttribute(attr)) {
@@ -159,6 +169,7 @@ function domQuery(selector, root) {
                 }
             }
         }
+        //没有属性值
         else {
             for (var i = 0, length1 = eles.length; i < length1; i++) {
                 if (eles[i].hasAttribute(attr)) {
@@ -172,8 +183,10 @@ function domQuery(selector, root) {
     return elements;
 }
 function $(selector) {
+    //multiple queries
     var result = [];
     if (selector.indexOf(" ") !== -1) {
+        //split selector by space
         var selectors = selector.split(" ");
         parents = domQuery(selectors[0]);
         for (var i = 1, length1 = selectors.length; i < length1; i++) {
@@ -185,6 +198,7 @@ function $(selector) {
         }
         result = parents;
     }
+    //single query
     else {
         var result = domQuery(selector, document);
     }
@@ -206,7 +220,7 @@ function addEvent(element, event, listener) {
 
 // 移除element对象对于event事件发生时执行listener的响应
 function removeEvent(element, event, listener) {
-    if (element.removeEventListener) { 
+    if (element.removeEventListener) { //标准
         element.removeEventListener(event, listener, false);
     }
 }
@@ -298,15 +312,19 @@ if (document.cookie.length>0)
 return "";
 }
 
-// 学习Ajax，并尝试自己封装一个Ajax方法。实现如下方法：
+// 习Ajax，并尝试自己封装一个Ajax方法。实现如下方法：
 
 function ajax(url, options) {
+    //新建一个XHR对象
     var xmlhttp;
     if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
     } else {
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")   ;
+        // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
+    //若没有设置type，则默认为get
 
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         options.onsuccess();
