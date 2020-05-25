@@ -15,30 +15,6 @@ ul, li {
     list-style: none;
 }
 
-
-/*标题*/
-
-.title h2, .title h3, .title h4 {
-    margin-bottom: 15px;
-}
-
-.title ol {
-    padding-left: 40px;
-}
-
-.title li {
-    list-style: decimal;
-    margin-bottom: 8px;
-}
-
-.title span {
-    background-color: #eee;
-    color: red;
-}
-
-
-/*轮播部分*/
-
 .Slideshow {
     width: 500px;
     height: 300px;

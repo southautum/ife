@@ -1,0 +1,34 @@
+div ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+}
+        
+div input {
+    display: block;
+    height: 22px;
+    line-height: 22px;
+    width: 200px;
+}
+
+div ul {
+    display: none;
+    width: 200px;
+    position: absolute;
+    background-color: #F1F1F1;
+}
+
+div ul li {
+    height: 22px;
+    line-height: 22px;
+    border-bottom: 1px solid #fff;
+}
+
+.active {
+    background-color: cadetblue;
+}
+
+span {
+    color: orangered;
+}
