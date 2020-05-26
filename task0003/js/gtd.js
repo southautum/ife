@@ -646,3 +646,109 @@ function sortDate(date) {
         return a.replace(/-/g, '') - b.replace(/-/g, '');
     });
 }
+function getCatalogNum() {
+    var sum;
+    for (var i = 0; i < catalog.length; i++) {
+        sum = 0;
+        for (var j = 0; j < catalog[i].child.length; j++) {
+            var childNum = getObjByAttr(childCatalog, 'id', catalog[i].child[j]).child.length;
+            sum += childNum;
+        }
+        catalog[i].num = sum;
+    };
+}
+function finishTask() {
+    var taskName = $(".task-title span").innerHTML;
+    var taskObj = getObjByAttr(task, "name", taskName);
+
+    if (taskObj.finish) {
+        alert('任务已经完成');
+        return;
+    } else {
+        if(!confirm("确定设置为已完成状态？")) {
+            return;
+        }
+        taskObj.finish = true;
+        save();
+        generateType();
+    }
+}
+function typeClick(element) {
+    var other = $(".type").getElementsByTagName('*');
+    for (var i = 0; i < other.length; i++) {
+        if (other[i].className === "choose") {
+            other[i].className = "";    
+            break;      
+        }
+    };
+    element.className = "choose";
+    listHandler();
+}
+function listClick(element) {
+    var other = $(".list-wrap").getElementsByTagName('*');
+    for (var i = 0; i < other.length; i++) {
+        if (other[i].className === "choose") {
+            other[i].className = "";    
+            break;      
+        }
+    };
+    element.className = "choose";
+    generateTask();
+}
+$.delegate(".list-menu", "li", "click", menuHandler);
+function menuHandler(event) {
+    var other = $(".list-menu").getElementsByTagName('*');
+    var bool;
+    var newListArr = [];
+
+    if (!event) {
+        if ($(".list-menu .choose").innerHTML === "未完成") {
+            bool = false;
+        } else if ($(".list-menu .choose").innerHTML === "已完成") {
+            bool = true;
+        } else {
+            generateList(listArr);
+            return;
+        }
+    } else {
+        var e = event || window.event;
+        var target = e.target || e.srcElement;
+        for (var i = 0; i < other.length; i++) {
+            if (other[i].className === "choose") {
+                other[i].className = "";
+                break;
+            }
+        };
+        target.className = "choose";
+        if (target.innerHTML === "未完成") {
+            bool = false;
+        } else if (target.innerHTML === "已完成") {
+            bool = true;
+        } else {
+            generateList(listArr);
+            return;
+        }
+    }
+   for (var j = 0; j < listArr.length; j++) {
+        for (var k = 0; k <task.length; k++) {
+            if (listArr[j] === task[k].id) {
+                if (task[k].finish === bool) {
+                    newListArr.push(task[k].id);                        
+                }
+            }               
+        }
+    }
+    generateList(newListArr);      
+}
+
+window.onload = function() {
+    if (!localStorage.getItem('catalog')) {  
+        localStorage.catalog = catalogText;
+        localStorage.childCatalog = childCatalogText;
+        localStorage.task = taskText;
+    }
+    catalog = JSON.parse(localStorage.catalog);
+    childCatalog = JSON.parse(localStorage.childCatalog);
+    task = JSON.parse(localStorage.task);
+    generateType();
+}
